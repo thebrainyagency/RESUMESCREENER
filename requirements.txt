@@ -1,0 +1,14 @@
+# Parsing
+PyPDF2
+python-docx
+
+# Text processing
+scikit-learn
+nltk
+
+# LLM API
+openai
+
+# Utilities
+tqdm
+pandas

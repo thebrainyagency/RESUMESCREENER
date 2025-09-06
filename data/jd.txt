@@ -1,0 +1,28 @@
+Generative AI Intern – Job Description
+Company DescriptionAt The Brainy Agency, we believe technology should make work lighter, not heavier. Our mission is to free people from repetitive tasks so they can focus on creativity, strategy, and meaningful work.
+We build workflow automation tools, AI chatbots, and agentic AI systems using cutting-edge frameworks like LangChain, LangGraph, MCP, and AutoGen. Our goal is to reduce costs, remove friction, and create scalable, easy-to-integrate automation solutions for businesses.
+Role DescriptionWe are looking for a Generative AI Engineer Intern to join our team in Bengaluru (hybrid role with some work-from-home flexibility).
+As a Generative AI Intern, you’ll gain hands-on experience by working on:
+Designing automation workflows powered by AI.
+Developing and experimenting with Generative AI models (LLMs, RAG, fine-tuning).
+Building and maintaining chatbots, workflow engines, and AI frameworks.
+Collaborating with team members to deliver efficient, automated solutions.
+Must-have QualificationsApplicants must have these qualifications to be considered:
+Basic coding knowledge (any language).
+Strong interest in automation and AI.
+0–1 years of experience (projects, internships, or coursework in generative AI/automation).
+Must be located within commutable distance to Greater Bengaluru Area, India.
+Eagerness to learn and explore AI/automation tools.
+Preferred Qualifications (Not mandatory, but a strong plus)
+Familiarity with Python or any programming language.
+Curiosity to explore automation frameworks like LangChain, LangGraph, MCP, AutoGen.
+Understanding of how automation can simplify business workflows.
+Exposure to projects involving chatbots, workflow automation, or AI-powered tools (college/side projects count).
+Good problem-solving, creativity, and collaboration skills.
+Strong skills in Automations, Generative AI (RAG, Fine-tuning), LangChain, and LangGraph, along with expertise in Full-Stack Development, will be considered a significant advantage.
+Why Join Us?
+Work directly on real-world AI/automation projects.
+Hands-on exposure to modern AI frameworks and tools.
+Mentorship from an experienced AI-first team.
+Be part of a fast-growing AI agency with a focus on innovation.
+GenAI keywords: langchain, langgraph, rag, retrieval augmented generation, llm, agent, agents, autogen, mcp, prompt engineering, embeddings, vector db, pinecone, chromadb, weaviate, faiss, fine-tune, finetune, openai, vertex ai, bedrock, huggingface, transformers, diffusion, lora, sdxl, llama, mistral, langsmith, rasa

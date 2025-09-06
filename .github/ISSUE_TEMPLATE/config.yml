@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Project is provided AS IS (no support)
+    url: https://github.com/<YOUR_ORG>/<YOUR_REPO>#readme
+    about: Issues are disabled. Please fork the repository if you need changes.

@@ -1,0 +1,74 @@
+# === Project data & outputs ===
+data/resumes/
+out/cache/
+out/*.csv
+out/*.jsonl
+
+# === Python caches & bytecode ===
+__pycache__/
+*.py[cod]
+*$py.class
+
+# === Virtual environments ===
+.venv/
+venv/
+env/
+ENV/
+.conda/
+.python-version
+
+# === Build / packaging ===
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+pip-log.txt
+
+# === Test & coverage artifacts ===
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+pytestdebug.log
+
+# === Type checker caches ===
+.mypy_cache/
+.pyre/
+.pyright/
+
+# === Logs ===
+*.log
+logs/
+
+# === Jupyter ===
+.ipynb_checkpoints/
+*.ipynb
+
+# === IDE / Editor settings ===
+.vscode/
+.idea/
+*.code-workspace
+
+# === OS cruft ===
+.DS_Store
+Thumbs.db
+
+# === Environment & secrets ===
+.env
+.env.*
+*.secret
+*.key
+*.pem
+
+# === Temporary files ===
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+~$*
+
+# === General caches ===
+.cache/
+__pypackages__/
