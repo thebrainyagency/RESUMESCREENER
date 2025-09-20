@@ -17,7 +17,7 @@ def main():
 
     os.makedirs(args.out, exist_ok=True)
 
-    # 1) Parse resumes (compute res_sha)
+    # 1) Parse resumes
     resumes = parse_resumes(args.resumes)
 
     # 2) Load JD

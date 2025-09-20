@@ -12,3 +12,6 @@ openai
 # Utilities
 tqdm
 pandas
+
+# Web UI
+streamlit

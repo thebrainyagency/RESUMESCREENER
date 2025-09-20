@@ -5,99 +5,111 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Status: As-Is](https://img.shields.io/badge/status-as--is-lightgrey)
 
-# Resume Screener — Setup & Usage (Windows & macOS)
+# Resume Screener — Setup & Usage
 
-This project screens resumes against a rubric using LLMs. It parses your rubric from `data/rubric.txt`, scores shortlisted resumes, and produces ranked results.
+This project screens resumes against a rubric using LLMs. It provides both a **Streamlit web UI** for easy team use and a **command-line interface** for programmatic access.
 
 **Pipeline at a glance**
-1. Parse resumes (`src/parser.py`) and compute stable IDs.
-2. Prefilter & shortlist by JD (`src/prefilter.py`).
-3. Parse the rubric with an LLM (cached) (`src/rubric_parser.py`).
+1. Parse resumes (`src/parser.py`) from PDF/DOCX/TXT files.
+2. Prefilter & shortlist by job description (`src/prefilter.py`).
+3. Parse the rubric with an LLM (`src/rubric_parser.py`).
 4. Score candidates with rubric-driven dimensions (`src/scorer.py`).
-5. Rank & export (`src/ranker.py`) via `src/cli.py`.
+5. Rank & export results (`src/ranker.py`).
 
 ---
 
 ## Prerequisites
 
-- **Python** 3.10–3.12
-- **OpenAI API key** in env var `OPENAI_API_KEY`
-- A rubric at `data/rubric.txt`
-- A folder of resumes (PDF/DOCX/TXT supported by your parser)
-- A job description text file (e.g., `jd.txt`)
+- **Python** 3.12+
+- **OpenAI API key** (can be set as env var `OPENAI_API_KEY` or entered in UI)
+- **uv package manager** (recommended) or pip
+- Resume files (PDF/DOCX/TXT supported)
+- Job description text
+- Scoring rubric text
 
-> The scorer owns caching and treats the rubric as the single source of truth. Changing the rubric or `SCHEMA_VER` naturally creates fresh cache entries.
+## Two Ways to Use
+
+### 🖥️ **Streamlit Web UI** (Recommended for Teams)
+Easy-to-use web interface with drag & drop file uploads, progress tracking, and results visualization.
+
+### ⌨️ **Command Line Interface**
+Direct CLI access for automation and scripting.
 
 ---
 
-## Quick Start — Windows (PowerShell)
+## 🖥️ Streamlit Web UI Setup
 
-1. Open PowerShell in the project root.
-2. Create & activate a virtual environment (example uses Python 3.11):
-   ```ps1
-   py -3.11 -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   ```
-3. Install dependencies:
-   ```ps1
-   pip install -r requirements.txt
-   ```
-   If you don't have a requirements file, install the minimum:
-   ```ps1
-   pip install openai pandas tqdm
-   ```
-4. Set your OpenAI key (choose one):
-   - Current shell only:
-     ```ps1
-     $Env:OPENAI_API_KEY = "sk-..."
-     ```
-   - Persist for future shells:
-     ```ps1
-     setx OPENAI_API_KEY "sk-..."
-     ```
-5. Ensure your rubric exists at `data\rubric.txt`.
-6. Prepare inputs:
-   - `resumes\` → PDF/DOCX/TXT files
-   - `jd.txt` → job description
-7. Run the CLI:
-   ```ps1
-   python -m src.cli --resumes .\resumes --jd .\jd.txt --k 100 --out .\out
-   ```
-   OR
-   ```ps1
-   uv run python -m src.cli --resumes ./data/resumes --jd ./data/jd.txt --k 5 --out ./out
-   ```
+### Installation
+```bash
+# Clone or download the repository
+# Navigate to project directory
+
+# Install dependencies with uv (recommended)
+uv sync
+
+# OR install with pip
+pip install -r requirements.txt
+```
+
+### Running the Web UI
+```bash
+# Start the Streamlit app
+uv run streamlit run app.py
+
+# OR with pip
+streamlit run app.py
+```
+
+### Using the Web Interface
+1. **Setup**: Enter OpenAI API key and select model (gpt-4o or gpt-4o-mini)
+2. **Upload**: Drag & drop resumes, paste job description and rubric
+3. **Configure**: Set percentage of resumes to score (25% recommended)
+4. **Process**: Click "Start Screening" and watch real-time progress
+5. **Results**: View rankings, individual scores, and download CSV
+
 ---
 
-## Quick Start — macOS (Terminal)
+## ⌨️ Command Line Interface
 
-1. Open Terminal in the project root.
-2. Create & activate a virtual environment:
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   Without a requirements file, install the minimum:
-   ```bash
-   pip install openai pandas tqdm
-   ```
-4. Set your OpenAI key (current shell):
-   ```bash
-   export OPENAI_API_KEY="sk-..."
-   ```
-   (Optionally add to `~/.zshrc` or `~/.bashrc` for persistence.)
-5. Ensure your rubric exists at `data/rubric.txt`.
-6. Prepare inputs:
-   - `resumes/` → PDF/DOCX/TXT files
-   - `jd.txt` → job description
-7. Run the CLI:
-   ```bash
-   python -m src.cli --resumes ./resumes --jd ./jd.txt --k 100 --out ./out
-   ```
+### Basic Usage
+```bash
+# Using uv (recommended)
+uv run python -m src.cli --resumes ./resumes --jd ./jd.txt --k 50 --out ./out
+
+# Using pip
+python -m src.cli --resumes ./resumes --jd ./jd.txt --k 50 --out ./out
+```
+
+### Arguments
+- `--resumes`: Directory containing resume files
+- `--jd`: Path to job description text file
+- `--k`: Number of top resumes to score (default: 100)
+- `--out`: Output directory (default: ./out)
+
+### Environment Setup for CLI
+```bash
+# Set OpenAI API key
+export OPENAI_API_KEY="sk-..."
+
+# Optional: Override model (default: gpt-4o)
+export OPENAI_MODEL_PARSE="gpt-4o"
+export OPENAI_MODEL_SCORE="gpt-4o"
+```
+---
+
+## File Organization
+
+### Sample Files (Included)
+- `data/jd_sample.txt` - Example job description
+- `data/rubric_sample.txt` - Example scoring rubric
+- `data/resumes/` - Sample resume files
+
+### Working Files (Create These)
+- `resumes/` - Your actual resume files
+- `jd.txt` - Your job description
+- `rubric.txt` - Your scoring rubric
+
+> **Note**: Working files are in `.gitignore` to keep your actual screening data private.
 
 ---
 
