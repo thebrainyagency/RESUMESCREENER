@@ -1,11 +1,9 @@
 import os, json
 from typing import Dict, Any
 from openai import OpenAI
-from src.utils import atomic_write_json, sha256_text
 
 RUBRIC_PATH = os.getenv("RUBRIC_PATH", "data/rubric.txt")
 OPENAI_MODEL_PARSE = os.getenv("OPENAI_MODEL_PARSE", "gpt-4o")
-RUBRIC_CACHE_ROOT = os.getenv("RUBRIC_CACHE_ROOT", "out/cache/rubric")
 
 _client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -36,21 +34,10 @@ def _slugify(title: str) -> str:
     while "__" in s: s = s.replace("__", "_")
     return s.strip("_") or "dimension"
 
-def _cache_paths(rubric_text: str):
-    rub_sha = sha256_text(rubric_text)[:16]
-    os.makedirs(RUBRIC_CACHE_ROOT, exist_ok=True)
-    return rub_sha, os.path.join(RUBRIC_CACHE_ROOT, f"{rub_sha}.json")
 
 def parse_rubric(rubric_path: str = RUBRIC_PATH) -> Dict[str, Any]:
-    """LLM-parse rubric text (no regex). Cached by rubric hash."""
+    """LLM-parse rubric text into structured JSON."""
     rubric_text = _read(rubric_path)
-    rub_sha, cache_path = _cache_paths(rubric_text)
-
-    if os.path.exists(cache_path):
-        with open(cache_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        data["cache_hit"] = True
-        return data
 
     try:
         resp = _client.chat.completions.create(
@@ -72,18 +59,13 @@ def parse_rubric(rubric_path: str = RUBRIC_PATH) -> Dict[str, Any]:
                 b["max_points"] = int(b.get("max_points", 0))
         data = {
             "dimensions": dims,
-            "total_max_points": sum(d["max_points"] for d in dims),
-            "rubric_sha": rub_sha,
-            "cache_hit": False,
+            "total_max_points": sum(d["max_points"] for d in dims)
         }
     except Exception as e:
         data = {
             "dimensions": [],
             "total_max_points": 0,
-            "rubric_sha": "error",
-            "error": str(e),
-            "cache_hit": False,
+            "error": str(e)
         }
 
-    atomic_write_json(cache_path, data)
     return data

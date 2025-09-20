@@ -1,7 +1,6 @@
 import os
 from PyPDF2 import PdfReader
 import docx
-from src.utils import sha256_bytes
 
 def _parse_pdf(path: str) -> str:
     try:
@@ -26,9 +25,7 @@ def _parse_txt(path: str) -> str:
 
 def parse_resumes(folder: str):
     """
-    Return list of {"filename","path","text","res_sha"} for .pdf/.docx/.txt files.
-    Also computes res_sha from file bytes for stable LLM cache identity.
-    (Parsed-text on-disk cache is optional and omitted here for simplicity.)
+    Return list of {"filename","path","text"} for .pdf/.docx/.txt files.
     """
     resumes = []
     for file in sorted(os.listdir(folder)):
@@ -39,10 +36,6 @@ def parse_resumes(folder: str):
         if not (lower.endswith(".pdf") or lower.endswith(".docx") or lower.endswith(".txt")):
             continue
 
-        with open(path, "rb") as fb:
-            raw = fb.read()
-        res_sha = sha256_bytes(raw)[:16]
-
         if lower.endswith(".pdf"):
             text = _parse_pdf(path)
         elif lower.endswith(".docx"):
@@ -51,13 +44,11 @@ def parse_resumes(folder: str):
             text = _parse_txt(path)
 
         if not text:
-            # keep empty/err text; scorer can handle it
             text = ""
 
         resumes.append({
             "filename": file,
             "path": path,
-            "text": text,
-            "res_sha": res_sha
+            "text": text
         })
     return resumes

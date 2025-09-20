@@ -63,7 +63,10 @@ This project screens resumes against a rubric using LLMs. It parses your rubric 
    ```ps1
    python -m src.cli --resumes .\resumes --jd .\jd.txt --k 100 --out .\out
    ```
-
+   OR
+   ```ps1
+   uv run python -m src.cli --resumes ./data/resumes --jd ./data/jd.txt --k 5 --out ./out
+   ```
 ---
 
 ## Quick Start — macOS (Terminal)

@@ -1,8 +1,12 @@
 # === Project data & outputs ===
 data/resumes/
-out/cache/
 out/*.csv
 out/*.jsonl
+
+# === Working files (not sample files) ===
+resumes/
+jd.txt
+rubric.txt
 
 # === Python caches & bytecode ===
 __pycache__/
@@ -72,3 +76,6 @@ Thumbs.db
 # === General caches ===
 .cache/
 __pypackages__/
+
+# === Claude Code files ===
+CLAUDE.md

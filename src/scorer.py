@@ -4,7 +4,6 @@ import json
 from typing import Dict, Any, List
 from openai import OpenAI
 
-from src.utils import atomic_write_json, sha256_text
 from src.rubric_parser import parse_rubric
 from src.contact_norm import (
     detect_contacts,
@@ -12,10 +11,8 @@ from src.contact_norm import (
     postprocess_extracted,
 )
 
-SCHEMA_VER = "v4_split_llmparse_contactnorm"
 OPENAI_MODEL_SCORE = os.getenv("OPENAI_MODEL_SCORE", "gpt-4o")
 MAX_RESUME_CHARS = int(os.getenv("MAX_RESUME_CHARS", "5000"))
-SCORE_CACHE_ROOT = os.getenv("SCORE_CACHE_ROOT", "out/cache/llm")
 
 _client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -105,15 +102,13 @@ def _build_prompt(jd_text: str, resume: Dict[str, Any], rubric: Dict[str, Any], 
         "- Evidence must be literal quotes from the resume.\n"
     )
 
-def score_with_llm(resume: Dict[str, Any], jd_text: str, out_root: str = "out") -> Dict[str, Any]:
+def score_with_llm(resume: Dict[str, Any], jd_text: str) -> Dict[str, Any]:
     """
-    Cache key = (jd_sha, res_sha, rubric_sha, SCHEMA_VER).
-    Returns LLM extraction + rubric-driven scores, decorated with cache metadata.
+    Returns LLM extraction + rubric-driven scores.
     """
-    # 1) Parse rubric (cached)
+    # 1) Parse rubric
     rubric = parse_rubric()  # reads RUBRIC_PATH internally
     dims = rubric.get("dimensions", [])
-    rubric_sha = rubric.get("rubric_sha", "unknown")
 
     # 2) Build dynamic schema & prompt
     schema = _dynamic_schema(dims)
@@ -135,21 +130,7 @@ def score_with_llm(resume: Dict[str, Any], jd_text: str, out_root: str = "out") 
         detected_block_text=rtext_bounded,
     )
 
-    # 3) Cache location
-    jd_sha = sha256_text(jd_text)[:16]
-    res_sha = resume["res_sha"]
-    cache_dir = os.path.join(SCORE_CACHE_ROOT, jd_sha, rubric_sha, SCHEMA_VER)
-    os.makedirs(cache_dir, exist_ok=True)
-    cache_path = os.path.join(cache_dir, f"{res_sha}.json")
-
-    # Fast path: let scorer own cache — still fine to re-call on every run
-    if os.path.exists(cache_path):
-        with open(cache_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        data["cache_hit"] = True
-        return data
-
-    # 4) LLM call
+    # 3) LLM call
     try:
         resp = _client.chat.completions.create(
             model=OPENAI_MODEL_SCORE,
@@ -210,18 +191,12 @@ def score_with_llm(resume: Dict[str, Any], jd_text: str, out_root: str = "out") 
             "total_score": 0,
         }
 
-    # 5) Decorate + persist
+    # 5) Add metadata
     data.update({
-        "jd_sha": jd_sha,
-        "res_sha": res_sha,
-        "schema_ver": SCHEMA_VER,
-        "rubric_sha": rubric_sha,
-        "prefilter_score": resume.get("prefilter_score", 0.0),
-        "cache_hit": False,
+        "prefilter_score": resume.get("prefilter_score", 0.0)
     })
-    atomic_write_json(cache_path, data)
     return data
 
 # Backwards-compatible alias
-def score_resume(resume: Dict[str, Any], jd_text: str, out_root: str = "out"):
-    return score_with_llm(resume, jd_text, out_root)
+def score_resume(resume: Dict[str, Any], jd_text: str):
+    return score_with_llm(resume, jd_text)
