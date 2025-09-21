@@ -44,17 +44,18 @@ def build_executable():
     """Build the executable using PyInstaller"""
     print("🔨 Building executable...")
 
+    # Determine the correct separator for --add-data (Windows uses ; others use :)
+    separator = ";" if sys.platform == "win32" else ":"
+
     # PyInstaller command
     cmd = [
         "pyinstaller",
-        "--onefile",                    # Single file
-        "--windowed",                   # No console window (for GUI apps)
-        "--name=ResumeScreener",       # Output name
-        "--icon=icon.ico",             # Icon (if exists)
-        "--add-data=ui;ui",            # Include UI package
-        "--add-data=src;src",          # Include src package
-        "--add-data=data;data",        # Include sample data
-        "--add-data=app.py;.",         # Include main app
+        "--onefile",                              # Single file
+        "--name=ResumeScreener",                 # Output name
+        f"--add-data=ui{separator}ui",           # Include UI package
+        f"--add-data=src{separator}src",         # Include src package
+        f"--add-data=data{separator}data",       # Include sample data
+        f"--add-data=app.py{separator}.",        # Include main app
         "--hidden-import=streamlit",
         "--hidden-import=openai",
         "--hidden-import=PyPDF2",
@@ -63,12 +64,16 @@ def build_executable():
         "--hidden-import=nltk",
         "--hidden-import=pandas",
         "--hidden-import=tqdm",
+        "--collect-all=streamlit",               # Collect all streamlit files
         "launcher.py"
     ]
 
-    # Remove icon if it doesn't exist
-    if not os.path.exists("icon.ico"):
-        cmd.remove("--icon=icon.ico")
+    # Add icon if it exists
+    if os.path.exists("icon.ico"):
+        cmd.insert(-1, "--icon=icon.ico")
+
+    # Don't use --windowed for Streamlit apps as we need console output
+    # cmd.append("--windowed")
 
     try:
         subprocess.check_call(cmd)
@@ -82,7 +87,9 @@ def build_executable():
 
 def create_distribution_package():
     """Create a distribution package with executable and required files"""
-    dist_dir = Path("ResumeScreener_Distribution")
+    # Create distribution directory in parent folder
+    parent_dir = Path("..").resolve()
+    dist_dir = parent_dir / "ResumeScreener_Distribution"
 
     # Clean and create distribution directory
     if dist_dir.exists():
