@@ -15,6 +15,3 @@ pandas
 
 # Web UI
 streamlit
-
-# Build tools
-pyinstaller

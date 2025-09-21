@@ -135,7 +135,7 @@ export OPENAI_MODEL_SCORE="gpt-4o"
 
 ## 📦 Deployment for Non-Technical Users
 
-### Option 1: Simple Launcher Scripts (Recommended)
+### Simple Launcher Scripts
 
 **For Windows Users:**
 1. Share the project folder with `run_resume_screener.bat`
@@ -150,32 +150,19 @@ export OPENAI_MODEL_SCORE="gpt-4o"
    - Double-click `run_resume_screener.sh`
    - Browser opens automatically
 
-### Option 2: Full Executable
-
-Create a single executable file that includes everything:
-
-```bash
-# Install PyInstaller and build
-pip install pyinstaller
-python build_executable.py
-```
-
-This creates a `ResumeScreener_Distribution/` folder with:
-- Single executable file (no Python installation required)
-- Sample data files
-- User instructions
-
 ### What Users Need:
+- Python 3.12+ installed
 - OpenAI API key
 - Resume files (PDF/DOCX/TXT)
 - Internet connection
 - Modern web browser
 
 ### User Experience:
-1. Double-click launcher/executable
-2. Browser opens to the app automatically
-3. Enter API key and follow the workflow
-4. Download results when complete
+1. Double-click launcher script
+2. Script installs dependencies automatically
+3. Browser opens to the app
+4. Enter API key and follow the workflow
+5. Download results when complete
 
 ---
 
