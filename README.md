@@ -113,70 +113,12 @@ export OPENAI_MODEL_SCORE="gpt-4o"
 
 ---
 
-## Running the CLI
+## Output Files
 
-```bash
-python -m src.cli --resumes <RESUMES_DIR> --jd <JD_TXT_PATH> --k 100 --out ./out
-```
-**Args**
-- `--resumes`  : Directory containing resumes
-- `--jd`       : Path to the job description text file
-- `--k`        : Number of top prefiltered resumes to score with the LLM (default 100)
-- `--out`      : Output directory (default `./out`)
+- `out/details.jsonl` — Detailed scoring data per resume (extracted fields + dimension scores)
+- `out/results.csv` — Final ranked results (sorted by total score)
 
-**Notes**
-- The CLI always calls the scorer; caching is handled inside the scorer itself.
-- Ensure `data/rubric.txt` exists; it is the authoritative scoring rubric.
-- The scorer appends a `DETECTED_CONTACTS` block to stabilize URL/email/phone extraction.
-
----
-
-## Environment Variables
-
-**Required**
-- `OPENAI_API_KEY` — Your OpenAI API key
-
-**Optional (defaults are sensible)**
-- `RUBRIC_PATH`        : Path to rubric (default `data/rubric.txt`)
-- `OPENAI_MODEL_PARSE` : Model for rubric parsing (default `gpt-4o`)
-- `OPENAI_MODEL_SCORE` : Model for scoring (default `gpt-4o`)
-- `RUBRIC_CACHE_ROOT`  : Rubric cache dir (default `out/cache/rubric`)
-- `SCORE_CACHE_ROOT`   : Scoring cache dir (default `out/cache/llm`)
-- `MAX_RESUME_CHARS`   : Truncation limit for resume text (default `5000`)
-
-**Windows (PowerShell)**
-```ps1
-$Env:OPENAI_API_KEY = "sk-..."
-$Env:RUBRIC_PATH = "data\\rubric.txt"
-```
-
-**macOS (zsh/bash)**
-```bash
-export OPENAI_API_KEY="sk-..."
-export RUBRIC_PATH="data/rubric.txt"
-```
-
----
-
-## Outputs & Cache Layout
-
-- `out/details.jsonl` — One JSON record per scored resume (extracted fields + per‑dimension scores)  
-- `out/results.csv`   — Ranked results (uses `total_score` by default)
-
-**Cache (managed by scorer)**
-```
-out/
-└── cache/
-    ├── rubric/
-    │   └── <rubric_sha>.json
-    └── llm/
-        └── <jd_sha>/
-            └── <rubric_sha>/
-                └── <SCHEMA_VER>/
-                    └── <res_sha>.json
-```
-
-You can safely rerun the CLI; cached entries are reused automatically.
+> **Note**: Each run processes fresh without caching, so results are always current.
 
 ---
 
@@ -187,7 +129,7 @@ You can safely rerun the CLI; cached entries are reused automatically.
 - **macOS SSL** (python.org builds) → run `Install Certificates.command` from your Python folder.
 - **Empty outputs** → ensure `data/rubric.txt`, a non-empty `resumes/` folder, and a valid `jd.txt`.
 - **PDF extraction issues** → the pipeline normalizes contacts, but make sure your PDFs contain text (not images only).
-- **Force fresh runs** → delete `out/cache/`.
+- **Streamlit issues** → try refreshing the browser or restarting the app.
 
 ---
 
