@@ -39,7 +39,7 @@ def calculate_k_value(total_resumes: int, percentage: int) -> int:
 def load_sample_rubric() -> str:
     """Load sample rubric from file"""
     try:
-        with open("data/rubric_sample.txt", "r") as f:
+        with open("data/rubric_sample.txt", "r", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
         return ""

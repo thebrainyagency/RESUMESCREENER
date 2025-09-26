@@ -1,83 +1,48 @@
-A. Projects / Initiatives (30 points)
+Projects / Initiatives (30 points)
+25–30: Multiple self-initiated GenAI projects (chatbots, LangChain workflows, vector DB experiments, hackathons, GitHub repos with demos). Shows initiative and depth.
+15–20: 2–3 strong course or guided projects with some originality.
+5–10: Tutorial-level work, academic exercises only.
+0–4: Minimal evidence of hands-on work.
+Focus: Has the person actually tinkered? Can they show something they built, even if small?
 
-25–30 → Multiple self-initiated GenAI projects (chatbots, LangChain workflows, vector DB experiments, hackathons, GitHub repos with demos). Shows initiative and depth.
+Technical Skills (25 points)
+20–25: Comfortable with Python, prompt engineering, LangChain/LangGraph, embeddings, vector DBs (Pinecone, Chroma, FAISS), HuggingFace. Some cloud or infra is a plus.
+15–19: Good Python plus some GenAI exposure (basic LangChain, RAG, chatbot builds).
+8–14: Strong coding but limited GenAI frameworks.
+0–7: Weak coding foundation or no GenAI exposure.
+Focus: Can they code and use modern GenAI tools, or will they need to learn from scratch?
 
-15–20 → 2–3 strong course or guided projects with some originality.
+Relevant Exposure (15 points)
+12–15: Hackathons, research labs, internships, or open-source in AI/automation.
+8–11: College courses plus some side projects.
+3–7: Coursework only, no real-world application.
+0–2: No exposure.
+Focus: Have they worked in environments where creativity and collaboration mattered?
 
-5–10 → Tutorial-level work, academic exercises only.
+Learning Agility and Curiosity (10 points)
+9–10: Actively blogs, shares demos, experiments with cutting-edge tools (LangGraph, MCP, AutoGen). Obsessed with trying new frameworks.
+6–8: Reads and experiments regularly, can explain what they have learned.
+3–5: Some curiosity, limited evidence of exploration.
+0–2: Passive learner, no signs of self-driven exploration.
+Focus: Do they have the tinkerer mindset to keep up in a fast-moving field?
 
-0–4 → Minimal evidence of hands-on work.
+Communication (10 points)
+9–10: Excellent clarity in explaining projects (well-documented GitHub, blogs, videos).
+6–8: Clear resume, can describe work well.
+3–5: Average communication, limited project documentation.
+0–2: Poor clarity, unclear resume or project descriptions.
+Focus: Can they communicate ideas to teammates and future clients?
 
-👉 Focus: Has this person actually tinkered? Can they show me something they built, even if small?
+Innovation and Collaboration (5 points)
+5: Hackathon wins, creative or unusual projects, strong teamwork.
+3–4: Some evidence of creativity or group projects.
+1–2: Limited innovation.
+0: None.
+Focus: Are they creative problem-solvers who can work in a team?
 
-B. Technical Skills (25 points)
-
-20–25 → Comfortable with Python, prompt engineering, LangChain/LangGraph, embeddings, vector DBs (Pinecone, Chroma, FAISS), HuggingFace. Some cloud or infra is a plus.
-
-15–19 → Good Python + some GenAI exposure (basic LangChain, RAG, chatbot builds).
-
-8–14 → Strong coding but limited GenAI frameworks.
-
-0–7 → Weak coding foundation or no GenAI exposure.
-
-👉 Focus: Can they code + use modern GenAI tools, or will they need to learn from scratch?
-
-C. Relevant Exposure (15 points)
-
-12–15 → Hackathons, research labs, internships, or open-source in AI/automation.
-
-8–11 → College courses + some side projects.
-
-3–7 → Coursework only, no real-world application.
-
-0–2 → No exposure.
-
-👉 Focus: Have they worked in environments where creativity and collaboration mattered?
-
-D. Learning Agility & Curiosity (10 points)
-
-9–10 → Actively blogs, shares demos, experiments with cutting-edge tools (LangGraph, MCP, AutoGen). Obsessed with trying new frameworks.
-
-6–8 → Reads and experiments regularly, can explain what they’ve learned.
-
-3–5 → Some curiosity, limited evidence of exploration.
-
-0–2 → Passive learner, no signs of self-driven exploration.
-
-👉 Focus: Do they have the tinkerer mindset to keep up in a fast-moving field?
-
-E. Communication (10 points)
-
-9–10 → Excellent clarity in explaining projects (well-documented GitHub, blogs, videos).
-
-6–8 → Clear resume, can describe work well.
-
-3–5 → Average communication, limited project documentation.
-
-0–2 → Poor clarity, unclear resume/project descriptions.
-
-👉 Focus: Can they communicate ideas to teammates and future clients?
-
-F. Innovation / Collaboration (5 points)
-
-5 → Hackathon wins, creative/unusual projects, strong teamwork.
-
-3–4 → Some evidence of creativity or group projects.
-
-1–2 → Limited innovation.
-
-0 → None.
-
-👉 Focus: Are they creative problem-solvers who can work in a team?
-
-G. Education / Academic Rigor (5 points)
-
-5 → Top-tier college, AI/ML electives, or strong online certifications (DeepLearning.ai, HuggingFace, fast.ai).
-
-3–4 → Decent college + relevant coursework.
-
-1–2 → General degree, minimal AI coursework.
-
-0 → No relevant coursework.
-
-👉 Focus: Do they have enough foundational grounding to grow fast?
+Education and Academic Rigor (5 points)
+5: Top-tier college, AI/ML electives, or strong online certifications (DeepLearning.ai, HuggingFace, fast.ai).
+3–4: Decent college plus relevant coursework.
+1–2: General degree, minimal AI coursework.
+0: No relevant coursework.
+Focus: Do they have enough foundational grounding to grow fast?
