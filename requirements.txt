@@ -1,17 +1,17 @@
 # Parsing
-PyPDF2
-python-docx
+PyPDF2==3.0.1
+python-docx==1.2.0
 
 # Text processing
-scikit-learn
-nltk
+scikit-learn==1.7.1
+nltk==3.9.1
 
 # LLM API
-openai
+openai==1.106.1
 
 # Utilities
-tqdm
-pandas
+tqdm==4.67.1
+pandas==2.3.2
 
 # Web UI
-streamlit
+streamlit==1.49.1

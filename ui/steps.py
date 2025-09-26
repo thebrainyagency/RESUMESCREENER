@@ -172,13 +172,13 @@ def step3_process():
         preview_text = st.session_state.jd_text[:500]
         if len(st.session_state.jd_text) > 500:
             preview_text += "..."
-        st.text_area("Preview", value=preview_text, height=100, disabled=True, label_visibility="hidden")
+        st.text_area("Preview", value=preview_text, height=100, disabled=True, label_visibility="hidden", key="jd_preview")
 
     with st.expander("📊 Rubric Preview"):
         preview_text = st.session_state.rubric_text[:500]
         if len(st.session_state.rubric_text) > 500:
             preview_text += "..."
-        st.text_area("Preview", value=preview_text, height=100, disabled=True, label_visibility="hidden")
+        st.text_area("Preview", value=preview_text, height=100, disabled=True, label_visibility="hidden", key="rubric_preview")
 
     # Navigation and process
     col1, col2 = st.columns(2)

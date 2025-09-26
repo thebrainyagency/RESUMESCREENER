@@ -44,19 +44,13 @@ Direct CLI access for automation and scripting.
 # Clone or download the repository
 # Navigate to project directory
 
-# Install dependencies with uv (recommended)
-uv sync
-
-# OR install with pip
+# Install dependencies (uses pinned versions for consistency)
 pip install -r requirements.txt
 ```
 
 ### Running the Web UI
 ```bash
 # Start the Streamlit app
-uv run streamlit run app.py
-
-# OR with pip
 streamlit run app.py
 ```
 
@@ -73,10 +67,6 @@ streamlit run app.py
 
 ### Basic Usage
 ```bash
-# Using uv (recommended)
-uv run python -m src.cli --resumes ./resumes --jd ./jd.txt --k 50 --out ./out
-
-# Using pip
 python -m src.cli --resumes ./resumes --jd ./jd.txt --k 50 --out ./out
 ```
 
@@ -87,6 +77,28 @@ python -m src.cli --resumes ./resumes --jd ./jd.txt --k 50 --out ./out
 - `--out`: Output directory (default: ./out)
 
 ### Environment Setup for CLI
+
+**Windows (Command Prompt):**
+```cmd
+# Set OpenAI API key
+set OPENAI_API_KEY=sk-...
+
+# Optional: Override model (default: gpt-4o)
+set OPENAI_MODEL_PARSE=gpt-4o
+set OPENAI_MODEL_SCORE=gpt-4o
+```
+
+**Windows (PowerShell):**
+```powershell
+# Set OpenAI API key
+$env:OPENAI_API_KEY="sk-..."
+
+# Optional: Override model (default: gpt-4o)
+$env:OPENAI_MODEL_PARSE="gpt-4o"
+$env:OPENAI_MODEL_SCORE="gpt-4o"
+```
+
+**macOS/Linux:**
 ```bash
 # Set OpenAI API key
 export OPENAI_API_KEY="sk-..."
@@ -147,7 +159,8 @@ export OPENAI_MODEL_SCORE="gpt-4o"
 **For macOS/Linux Users:**
 1. Share the project folder with `run_resume_screener.sh`
 2. User instructions:
-   - Double-click `run_resume_screener.sh`
+   - Make the script executable: `chmod +x run_resume_screener.sh`
+   - Double-click `run_resume_screener.sh` or run `./run_resume_screener.sh` in terminal
    - Browser opens automatically
 
 ### What Users Need:
